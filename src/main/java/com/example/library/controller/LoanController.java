@@ -6,24 +6,27 @@ import com.example.library.model.User;
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.LoanRepository;
 import com.example.library.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/loans")
 public class LoanController {
-    private final LoanRepository loanRepository;
-    private final BookRepository bookRepository;
-    private final UserRepository userRepository;
+    @Autowired
+    private  LoanRepository loanRepository;
+    @Autowired
+    private  BookRepository bookRepository;
+    @Autowired
+    private  UserRepository userRepository;
 
-    public LoanController(LoanRepository loanRepository, BookRepository bookRepository, UserRepository userRepository) {
-        this.loanRepository = loanRepository;
-        this.bookRepository = bookRepository;
-        this.userRepository = userRepository;
-    }
 
     @PostMapping
     public ResponseEntity<?> checkout(@RequestBody Map<String, Long> payload) {
@@ -51,5 +54,21 @@ public class LoanController {
         loan.setReturnedAt(OffsetDateTime.now());
         loanRepository.save(loan);
         return ResponseEntity.ok(loan);
+    }
+
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<Loan>> getUserBooks(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Loan> loans = loanRepository.findByMember_Id(id, pageable);
+
+        return loans.isEmpty()
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(loans.getContent());
+
     }
 }

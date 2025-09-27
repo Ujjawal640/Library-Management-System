@@ -1,18 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.6</version>
+        <relativePath/>
+    </parent>
+
     <groupId>com.example</groupId>
-    <artifactId>library-management</artifactId>
+    <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <name>library-management</name>
+    <name>Library_Management_Main</name>
+
     <properties>
         <java.version>17</java.version>
-        <spring.boot.version>3.1.4</spring.boot.version>
     </properties>
+
     <dependencies>
+        <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -25,6 +33,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+        <!-- MySQL -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- JWT -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -42,29 +59,286 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Validation -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
+        </dependency>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- Testing -->
         <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.1.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.30</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
             </plugin>
         </plugins>
     </build>
 </project>
+
+<!--        <?xml version="1.0" encoding="UTF-8"?>-->
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+<!--    <modelVersion>4.0.0</modelVersion>-->
+<!--    <parent>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--        <version>3.5.6</version>-->
+<!--        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+<!--    </parent>-->
+<!--    <groupId>com.example</groupId>-->
+<!--    <artifactId>demo</artifactId>-->
+<!--    <version>0.0.1-SNAPSHOT</version>-->
+<!--    <name>Library_Management_Main</name>-->
+<!--    <description>Demo project for Spring Boot</description>-->
+<!--    <url/>-->
+<!--    <licenses>-->
+<!--        <license/>-->
+<!--    </licenses>-->
+<!--    <developers>-->
+<!--        <developer/>-->
+<!--    </developers>-->
+<!--    <scm>-->
+<!--        <connection/>-->
+<!--        <developerConnection/>-->
+<!--        <tag/>-->
+<!--        <url/>-->
+<!--    </scm>-->
+<!--    <properties>-->
+<!--        <java.version>17</java.version>-->
+<!--    </properties>-->
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--        </dependency>-->
+<!--                <dependency>-->
+<!--                    <groupId>io.jsonwebtoken</groupId>-->
+<!--                    <artifactId>jjwt-api</artifactId>-->
+<!--                    <version>0.11.5</version>-->
+<!--                </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>jakarta.validation</groupId>-->
+<!--            <artifactId>jakarta.validation-api</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--        </dependency>-->
+<!--                <dependency>-->
+<!--                    <groupId>io.jsonwebtoken</groupId>-->
+<!--                    <artifactId>jjwt-impl</artifactId>-->
+<!--                    <version>0.11.5</version>-->
+<!--                    <scope>runtime</scope>-->
+<!--                </dependency>-->
+<!--                <dependency>-->
+<!--                    <groupId>io.jsonwebtoken</groupId>-->
+<!--                    <artifactId>jjwt-jackson</artifactId>-->
+<!--                    <version>0.11.5</version>-->
+<!--                    <scope>runtime</scope>-->
+<!--                </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.mysql</groupId>-->
+<!--            <artifactId>mysql-connector-j</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <annotationProcessorPaths>-->
+<!--                        <path>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                        </path>-->
+<!--                    </annotationProcessorPaths>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <excludes>-->
+<!--                        <exclude>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                        </exclude>-->
+<!--                    </excludes>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+
+<!--</project>-->
+
+
+<!--        &lt;!&ndash;<?xml version="1.0" encoding="UTF-8"?>&ndash;&gt;-->
+<!--        &lt;!&ndash;<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&ndash;&gt;-->
+<!--        &lt;!&ndash;         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">&ndash;&gt;-->
+<!--        &lt;!&ndash;    <modelVersion>4.0.0</modelVersion>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <parent>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <artifactId>spring-boot-starter-parent</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <version>3.1.6</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;    </parent>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <groupId>com.example</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <artifactId>demo</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <version>0.0.1-SNAPSHOT</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <name>Library_Management_Main</name>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <description>Demo project for Spring Boot</description>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <url/>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <licenses>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <license/>&ndash;&gt;-->
+<!--        &lt;!&ndash;    </licenses>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <developers>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <developer/>&ndash;&gt;-->
+<!--        &lt;!&ndash;    </developers>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <scm>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <connection/>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <developerConnection/>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <tag/>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <url/>&ndash;&gt;-->
+<!--        &lt;!&ndash;    </scm>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <properties>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <java.version>17</java.version>&ndash;&gt;-->
+<!--        &lt;!&ndash;&lt;!&ndash;        <maven.compiler.source>1.8</maven.compiler.source>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;&lt;!&ndash;        <maven.compiler.target>1.8</maven.compiler.target>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;    </properties>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;    <dependencies>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>spring-boot-starter-data-jpa</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>spring-boot-starter-web</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;&lt;!&ndash;        <dependency>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;&lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;&lt;!&ndash;            <artifactId>spring-boot-starter-data-jpa</artifactId>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;&lt;!&ndash;        </dependency>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>spring-boot-starter-security</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>io.jsonwebtoken</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>jjwt-api</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <version>0.11.5</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>io.jsonwebtoken</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>jjwt-impl</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <version>0.11.5</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <scope>runtime</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>io.jsonwebtoken</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>jjwt-jackson</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <version>0.11.5</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <scope>runtime</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>com.mysql</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>mysql-connector-j</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <scope>runtime</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>org.projectlombok</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>lombok</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <optional>true</optional>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>spring-boot-starter-test</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <scope>test</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>org.springframework.security</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>spring-security-test</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <scope>test</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>org.springdoc</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <version>2.1.0</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;    </dependencies>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <build>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <plugins>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <plugin>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </plugin>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </plugins>&ndash;&gt;-->
+<!--        &lt;!&ndash;    </build>&ndash;&gt;-->
+<!--        &lt;!&ndash;</project>&ndash;&gt;-->

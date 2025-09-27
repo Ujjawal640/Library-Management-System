@@ -3,6 +3,8 @@ package com.example.library.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "loans")
@@ -18,6 +20,10 @@ public class Loan {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private User member;
+
+
+    @OneToMany(mappedBy = "loan", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Fine> fines = new ArrayList<>();
 
     private OffsetDateTime checkedOutAt;
     private OffsetDateTime dueAt;

@@ -14,4 +14,6 @@ public class Book {
     private String subtitle;
     private Integer publishYear;
     private String language;
+    private String author;
+    private Integer quantity;
 }
